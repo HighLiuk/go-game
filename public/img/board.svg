@@ -1,0 +1,17 @@
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 90 90"
+>
+  <path
+    stroke-width="0.4"
+    stroke="black"
+    stroke-linecap="round"
+    d="M5,5h80M5,15h80M5,25h80M5,35h80M5,45h80M5,55h80M5,65h80M5,75h80M5,85h80M5,5v80M15,5v80M25,5v80M35,5v80M45,5v80M55,5v80M65,5v80M75,5v80M85,5v80"
+  ></path>
+  <circle cx="25" cy="25" r="0.7" />
+  <circle cx="65" cy="25" r="0.7" />
+  <circle cx="25" cy="65" r="0.7" />
+  <circle cx="65" cy="65" r="0.7" />
+  <circle cx="45" cy="45" r="0.7" />
+</svg>
