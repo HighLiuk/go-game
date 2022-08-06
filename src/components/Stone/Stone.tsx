@@ -1,4 +1,5 @@
 import { FC } from "react"
+import { cn } from "../../utils"
 
 type Props = {
   color: "black" | "white"
@@ -21,10 +22,6 @@ const Stone: FC<Props> = ({ color, x, y }) => {
       }}
     ></div>
   )
-}
-
-function cn(classes: string[]): string {
-  return classes.join(" ")
 }
 
 export default Stone
