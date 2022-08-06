@@ -1,8 +1,10 @@
 {
   "name": "go-game",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
+  "description": "A simple app to play Go with",
+  "author": "Luca Di Fazio <highliuk@gmail.com>",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
