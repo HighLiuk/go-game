@@ -250,6 +250,34 @@ describe("isLegalMove", () => {
 
     expect(board.space(coordinate(0, 0))).toBe(Space.EMPTY)
   })
+
+  it("marks ko as invalid", () => {
+    const board = new Board(9)
+      .move(coordinate(2, 0), Space.BLACK)
+      .move(coordinate(1, 0), Space.WHITE)
+      .move(coordinate(1, 1), Space.BLACK)
+      .move(coordinate(0, 1), Space.WHITE)
+      .move(coordinate(0, 0), Space.BLACK)
+
+    expect(board.isLegalMove(coordinate(1, 0), Space.WHITE)).toBeFalsy()
+  })
+
+  it("allows to capture after ko threat", () => {
+    const board = new Board(9)
+      .move(coordinate(2, 0), Space.BLACK)
+      .move(coordinate(1, 0), Space.WHITE)
+      .move(coordinate(1, 1), Space.BLACK)
+      .move(coordinate(0, 1), Space.WHITE)
+      .move(coordinate(0, 0), Space.BLACK)
+      .move(coordinate(1, 2), Space.WHITE)
+      .move(coordinate(2, 2), Space.BLACK)
+
+    expect(board.isLegalMove(coordinate(1, 0), Space.WHITE)).toBeTruthy()
+
+    board.move(coordinate(1, 0), Space.WHITE)
+
+    expect(board.isLegalMove(coordinate(0, 0), Space.BLACK)).toBeFalsy()
+  })
 })
 
 describe("remove", () => {

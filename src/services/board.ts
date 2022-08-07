@@ -36,6 +36,8 @@ function getXY(coo: string): [number, number] {
 }
 
 export default class Board {
+  private prevBoard?: Board
+
   public constructor(
     public readonly size: number = 9,
     public readonly moves: Map<string, Color> = new Map()
@@ -104,6 +106,19 @@ export default class Board {
     return this.liberties(coo).size
   }
 
+  private is(board: Board): boolean {
+    return (
+      Set([...this.moves.keys()]).equals(Set([...board.moves.keys()])) &&
+      [...this.moves].every((move) => board.moves.get(move[0]) === move[1])
+    )
+  }
+
+  public willCauseKo(coo: string, color: Color): boolean {
+    if (!this.prevBoard) return false
+
+    return this.clone().moveAndCapture(coo, color).is(this.prevBoard)
+  }
+
   private isLegalMove(coo: string, color: Color): boolean {
     if (this.isSpaceOccupied(coo)) return false
 
@@ -114,7 +129,7 @@ export default class Board {
       opposite(color)
     ).some((c) => this.libertiesCount(c) === 1)
 
-    return willHaveLiberties || willCapture
+    return (willHaveLiberties || willCapture) && !this.willCauseKo(coo, color)
   }
 
   private remove(coo: string) {
@@ -125,15 +140,25 @@ export default class Board {
     this.group(coo).forEach((c) => this.remove(c))
   }
 
+  private capture(coo: string, color: Color): Board {
+    this.matchingAdjacentCoordinates(coo, opposite(color))
+      .filter((c) => this.libertiesCount(c) === 1)
+      .forEach((c) => this.removeGroup(c))
+
+    return this
+  }
+
+  private moveAndCapture(coo: string, color: Color): Board {
+    return this.capture(coo, color).withMove(coo, color)
+  }
+
   public move(coo: string, color: Color): Board {
     if (!this.isLegalMove(coo, color)) {
       throw new Error("Not a valid position")
     }
 
-    this.matchingAdjacentCoordinates(coo, opposite(color))
-      .filter((c) => this.libertiesCount(c) === 1)
-      .forEach((c) => this.removeGroup(c))
+    this.prevBoard = this.clone()
 
-    return this.withMove(coo, color)
+    return this.moveAndCapture(coo, color)
   }
 }
