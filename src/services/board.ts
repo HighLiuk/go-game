@@ -130,10 +130,10 @@ export default class Board {
       throw new Error("Not a valid position")
     }
 
-    this.withMove(coo, color)
-      .matchingAdjacentCoordinates(coo, opposite(color))
-      .forEach((c) => this.libertiesCount(c) === 0 && this.removeGroup(c))
+    this.matchingAdjacentCoordinates(coo, opposite(color))
+      .filter((c) => this.libertiesCount(c) === 1)
+      .forEach((c) => this.removeGroup(c))
 
-    return this
+    return this.withMove(coo, color)
   }
 }

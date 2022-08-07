@@ -241,14 +241,14 @@ describe("isLegalMove", () => {
   })
 
   it("marks suicide in corner that kills first as valid", () => {
-    const board = new Board(3)
+    const board = new Board(9)
+      .move(coordinate(0, 0), Space.BLACK)
       .move(coordinate(2, 0), Space.BLACK)
-      .move(coordinate(2, 1), Space.BLACK)
-      .move(coordinate(1, 2), Space.BLACK)
+      .move(coordinate(1, 1), Space.BLACK)
+      .move(coordinate(0, 1), Space.WHITE)
       .move(coordinate(1, 0), Space.WHITE)
-      .move(coordinate(1, 1), Space.WHITE)
 
-    expect(board.isLegalMove(coordinate(2, 2), Space.WHITE)).toBeTruthy()
+    expect(board.space(coordinate(0, 0))).toBe(Space.EMPTY)
   })
 })
 
