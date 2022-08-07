@@ -1,4 +1,4 @@
-import { FC, useState } from "react"
+import { FC } from "react"
 import useGameStore from "../../store/game"
 import { cn } from "../../utils"
 import { Stone } from "../Stone"
@@ -9,19 +9,22 @@ type Props = {
 }
 
 const Square: FC<Props> = ({ x, y }) => {
-  const { isBlackTurn, pass } = useGameStore()
-  const [isEmpty, setIsEmpty] = useState(true)
-  const [color, setColor] = useState<"black" | "white">("black")
+  const { isBlackTurn, move, space } = useGameStore()
+  const color = space(x, y)
 
   function placeStone() {
-    setColor(isBlackTurn ? "black" : "white")
-    setIsEmpty(false)
-    pass()
+    const color = isBlackTurn ? "black" : "white"
+
+    try {
+      move(x, y, color)
+    } catch (err) {
+      console.error(err)
+    }
   }
 
   return (
     <>
-      {isEmpty ? (
+      {!color ? (
         <div
           className={cn([
             "absolute aspect-square w-[10%] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-full opacity-30",
