@@ -10,7 +10,9 @@ const port = process.env.PORT
 app.use(cors({ origin: process.env.CLIENT_URL }))
 
 app.get("/", (req: Request, res: Response) => {
-  res.send("Hello World!")
+  const matchId = "1"
+
+  res.json({ matchId })
 })
 
 app.listen(port, () => {
