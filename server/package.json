@@ -1,0 +1,24 @@
+{
+  "name": "go-game",
+  "private": true,
+  "version": "0.0.1",
+  "description": "An Express-powered backend to play Go",
+  "author": "Luca Di Fazio <highliuk@gmail.com>",
+  "scripts": {
+    "build": "tsc",
+    "dev": "nodemon src/app.ts",
+    "prettier": "prettier -wu .",
+    "start": "node dist/app"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "nodemon": "^2.0.19",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.7.4"
+  }
+}
