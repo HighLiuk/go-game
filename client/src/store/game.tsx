@@ -7,6 +7,7 @@ interface GameState {
   board: Board
   move: (x: number, y: number, color: "black" | "white") => void
   space: (x: number, y: number) => "black" | "white" | undefined
+  newGame: () => void
 }
 
 const useGameStore = create<GameState>()(
@@ -28,6 +29,12 @@ const useGameStore = create<GameState>()(
       if (color === Space.BLACK) return "black"
       if (color === Space.WHITE) return "white"
       return color
+    },
+    newGame() {
+      set({
+        isBlackTurn: true,
+        board: new Board(9),
+      })
     },
   }))
 )
