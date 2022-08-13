@@ -23,6 +23,7 @@ Then, install the backend.
 ```bash
 cd server
 cp .env.example .env
+cp .env.example .env.test
 npm i
 ```
 

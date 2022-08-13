@@ -6,15 +6,15 @@
   "author": "Luca Di Fazio <highliuk@gmail.com>",
   "scripts": {
     "build": "tsc",
-    "dev": "nodemon src/index.ts",
+    "dev": "dotenv -e .env -- nodemon src/index.ts",
     "prettier": "prettier -wu .",
-    "start": "node dist/index",
-    "test": "jest --watch"
+    "start": "dotenv -e .env -- node dist/index",
+    "test": "dotenv -e .env.test -- jest --watch"
   },
   "dependencies": {
     "@prisma/client": "^4.1.1",
     "cors": "^2.8.5",
-    "dotenv": "^16.0.1",
+    "dotenv-cli": "^6.0.0",
     "express": "^4.18.1"
   },
   "devDependencies": {
