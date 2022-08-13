@@ -23,3 +23,8 @@ describe("Routes", () => {
     })
   })
 })
+
+afterAll(async () => {
+  await prisma.match.deleteMany()
+  await prisma.$disconnect()
+})
