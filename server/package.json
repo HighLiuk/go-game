@@ -5,7 +5,7 @@
   "description": "An Express-powered backend to play Go",
   "author": "Luca Di Fazio <highliuk@gmail.com>",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --project tsconfig.build.json",
     "dev": "dotenv -e .env -- nodemon src/index.ts",
     "prettier": "prettier -wu .",
     "start": "dotenv -e .env -- node dist/index",
